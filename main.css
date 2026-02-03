@@ -1,0 +1,7 @@
+span, .organization-name, h4 {
+		display: inline;
+}
+
+span.activity-dates, span.activity-location{
+		float:right;
+}

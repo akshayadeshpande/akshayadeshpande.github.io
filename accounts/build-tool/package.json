@@ -1,0 +1,16 @@
+{
+  "name": "valentine-build-tool",
+  "version": "1.0.0",
+  "description": "Tool to encrypt and add new users to the Valentine's Day proposal website",
+  "main": "encrypt-user.js",
+  "type": "module",
+  "scripts": {
+    "encrypt": "node encrypt-user.js"
+  },
+  "keywords": ["encryption", "valentine", "build-tool"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "sharp": "^0.33.2"
+  }
+}

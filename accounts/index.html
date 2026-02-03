@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Account Management System">
+    <title>CMS - Account Portal</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Loading State -->
+    <div id="loading-state" class="state-container">
+        <div class="loader"></div>
+        <p class="loading-text">Loading...</p>
+    </div>
+
+    <!-- Password Prompt State -->
+    <div id="password-state" class="state-container hidden">
+        <div class="hearts-background">
+            <div class="heart"></div>
+            <div class="heart"></div>
+            <div class="heart"></div>
+            <div class="heart"></div>
+            <div class="heart"></div>
+        </div>
+
+        <div class="password-card">
+            <div class="login-logo">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+            </div>
+            <h1 class="title">Content Management System</h1>
+            <p class="subtitle">Development Environment - Testing Portal</p>
+
+            <form id="password-form" class="password-form">
+                <div class="input-group">
+                    <label for="password-input">Account Password</label>
+                    <input
+                        type="password"
+                        id="password-input"
+                        placeholder="Enter password"
+                        autocomplete="off"
+                        required
+                    />
+                </div>
+
+                <button type="submit" class="btn-primary" id="unlock-btn">
+                    <span>Access System</span>
+                </button>
+
+                <div id="password-error" class="error-message hidden"></div>
+                <div id="attempts-left" class="attempts-info hidden"></div>
+            </form>
+            <div class="login-footer">
+                <span class="version-text">v2.4.1 | Build 20240201</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Experience State -->
+    <div id="photo-state" class="state-container hidden">
+        <div class="photo-scroll-container" id="photo-scroll-container">
+            <!-- Photos will be dynamically inserted here -->
+        </div>
+
+        <!-- Progress indicator -->
+        <div class="progress-indicator" id="progress-indicator">
+            <!-- Progress dots will be dynamically inserted here -->
+        </div>
+
+        <!-- Scroll indicator (shows on first photo) -->
+        <div class="scroll-indicator" id="scroll-indicator">
+            <span class="scroll-indicator-text">Scroll down</span>
+            <svg class="scroll-indicator-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Question State -->
+    <div id="question-state" class="state-container hidden">
+        <div class="question-container">
+            <div class="floating-hearts">
+                <div class="floating-heart">💗</div>
+                <div class="floating-heart">💕</div>
+                <div class="floating-heart">💖</div>
+                <div class="floating-heart">💝</div>
+            </div>
+
+            <h1 class="question-title" id="question-title">
+                Hey <span id="recipient-name"></span>!
+            </h1>
+
+            <div class="message-box" id="personal-message"></div>
+
+            <h2 class="question-text">Will you be my Valentine? 💕</h2>
+
+            <div class="button-container">
+                <button class="btn-yes" id="yes-btn">Yes! 💖</button>
+                <button class="btn-no" id="no-btn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thank You State (for users who already said yes) -->
+    <div id="thankyou-state" class="state-container hidden">
+        <div class="thankyou-container">
+            <div class="floating-hearts">
+                <div class="floating-heart">💗</div>
+                <div class="floating-heart">💕</div>
+                <div class="floating-heart">💖</div>
+                <div class="floating-heart">💝</div>
+            </div>
+
+            <h1 class="thankyou-title">Thank You for Saying Yes! 💕</h1>
+
+            <div class="timer-container">
+                <p class="timer-label">We've been together for</p>
+                <div class="timer-display" id="timer-display">
+                    <div class="timer-unit">
+                        <span class="timer-value" id="timer-days">0</span>
+                        <span class="timer-label-small">days</span>
+                    </div>
+                    <div class="timer-unit">
+                        <span class="timer-value" id="timer-hours">0</span>
+                        <span class="timer-label-small">hours</span>
+                    </div>
+                    <div class="timer-unit">
+                        <span class="timer-value" id="timer-minutes">0</span>
+                        <span class="timer-label-small">minutes</span>
+                    </div>
+                    <div class="timer-unit">
+                        <span class="timer-value" id="timer-seconds">0</span>
+                        <span class="timer-label-small">seconds</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="thankyou-message">Every moment with you is a gift 💖</p>
+
+            <div class="thankyou-gif">
+                <img src="https://media.giphy.com/media/l0ErLeqamV3UOARsA/giphy.gif" alt="Thank you dance" class="thankyou-gif-img">
+            </div>
+        </div>
+    </div>
+
+    <!-- Success State -->
+    <div id="success-state" class="state-container hidden">
+        <div class="success-container">
+            <div class="heart-explosion">
+                <div class="explosion-heart">💖</div>
+                <div class="explosion-heart">💗</div>
+                <div class="explosion-heart">💕</div>
+                <div class="explosion-heart">💝</div>
+                <div class="explosion-heart">💘</div>
+                <div class="explosion-heart">💓</div>
+            </div>
+
+            <h1 class="success-title">🎉 Yes! 🎉</h1>
+            <p class="success-message">I'm so happy! This Valentine's Day just became perfect! 💕</p>
+
+            <div class="celebration-text">
+                <p>✨ You've made someone very happy ✨</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error State -->
+    <div id="error-state" class="state-container hidden">
+        <div class="error-container">
+            <div class="error-icon">⚠️</div>
+            <h1 class="error-title">Oops!</h1>
+            <p class="error-text" id="error-text"></p>
+        </div>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="background-music" loop>
+        <source src="music/background.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Scripts -->
+    <script type="module" src="js/data.js"></script>
+    <script type="module" src="js/crypto.js"></script>
+    <script type="module" src="js/ui.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
